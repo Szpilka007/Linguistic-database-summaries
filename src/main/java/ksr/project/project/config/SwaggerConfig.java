@@ -78,12 +78,6 @@ public class SwaggerConfig {
                                 typeResolver.resolve(ResponseEntity.class, WildcardType.class)),
                                 typeResolver.resolve(WildcardType.class)))
                 .useDefaultResponseMessages(false)
-                .globalResponseMessage(RequestMethod.GET,
-                        newArrayList(new ResponseMessageBuilder()
-                                .code(500)
-                                .message("500 message")
-                                .responseModel(new ModelRef("Error"))
-                                .build()))
                 .enableUrlTemplating(true)
                 .additionalModels(typeResolver.resolve(HouseEntity.class));
     }

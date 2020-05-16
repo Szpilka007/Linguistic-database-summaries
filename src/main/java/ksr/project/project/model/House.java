@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Data
 @Builder
@@ -13,15 +12,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class House {
 
     Long price;
-    int bedrooms;
+    Long bedrooms;
+    Double bathrooms;
     Double sqft_living;
     Double sqft_loft;
-    int floors;
-    int conditions;
-    int GRADE;
+    Long floors;
+    Long conditions;
+    Long GRADE;
+    Double view;
     Double sqft_above;
     Double sqft_basement;
     Double yr_built;
+    Double yr_renovation;
     Double sqft_living15;
     Double sqft_lot15;
 
