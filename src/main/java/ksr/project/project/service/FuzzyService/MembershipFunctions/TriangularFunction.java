@@ -25,4 +25,11 @@ public class TriangularFunction implements MembershipFunction {
         else
             return 0.0;
     }
+
+    @Override
+    public MembershipFunType getMembershipFunType() {
+        return MembershipFunType.TRIANGULAR;
+    }
+
+
 }

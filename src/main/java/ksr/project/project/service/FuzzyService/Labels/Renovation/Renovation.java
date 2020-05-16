@@ -1,8 +1,8 @@
-package ksr.project.project.service.FuzzyService.Labels.Bedroom;
+package ksr.project.project.service.FuzzyService.Labels.Renovation;
 
 import ksr.project.project.service.FuzzyService.MembershipFunctions.MembershipFunType;
 
-public interface Bedroom {
+public interface Renovation {
 
     String getDescription();
 

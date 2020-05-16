@@ -2,11 +2,11 @@ package ksr.project.project.service.FuzzyService.MembershipFunctions;
 
 import org.springframework.stereotype.Component;
 
-public class TrapeziodalFunction implements MembershipFunction {
+public class TrapezoidalFunction implements MembershipFunction {
 
     private double a, b, c, d;
 
-    public TrapeziodalFunction(double a, double b, double c, double d) {
+    public TrapezoidalFunction(double a, double b, double c, double d) {
         this.a = a;
         this.b = b;
         this.c = c;
@@ -23,4 +23,10 @@ public class TrapeziodalFunction implements MembershipFunction {
             return (this.d - x) / (this.d - this.c);
         return 0.0;
     }
+
+    @Override
+    public MembershipFunType getMembershipFunType() {
+        return MembershipFunType.TRAPEZOIDAL;
+    }
+
 }

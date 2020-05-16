@@ -4,6 +4,7 @@ import ksr.project.project.model.entity.HouseEntity;
 import ksr.project.project.repository.HouseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -20,6 +21,7 @@ public class CsvParserService {
         this.housesRepository = houseRepository;
     }
 
+    @Transactional
     public String readCsvFile() {
         String csvFile = "src/main/resources/houses.csv";
         BufferedReader br = null;
@@ -52,8 +54,6 @@ public class CsvParserService {
                                 .sqft_living15(Double.valueOf(houses[19]))
                                 .sqft_lot15(Double.valueOf(houses[20]))
                         .build());
-
-                System.out.println(this.housesRepository.count());
             }
 
 
