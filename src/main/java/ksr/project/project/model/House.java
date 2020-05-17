@@ -24,7 +24,5 @@ public class House {
     Double sqft_basement;
     Double yr_built;
     Double yr_renovation;
-    Double sqft_living15;
-    Double sqft_lot15;
 
 }
