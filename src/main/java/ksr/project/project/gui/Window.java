@@ -3,7 +3,10 @@ package ksr.project.project.gui;
 import ksr.project.project.model.House;
 import ksr.project.project.model.entity.HouseEntity;
 import ksr.project.project.service.FuzzyService.Labels.Bedroom.Bedroom;
+import ksr.project.project.service.FuzzyService.MembershipFunctions.MembershipFunType;
+import ksr.project.project.service.FuzzyService.Summarizer;
 import ksr.project.project.service.HouseService;
+import ksr.project.project.service.HouseSummariesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +19,13 @@ import java.util.List;
 @Service
 public class Window {
 
-    private final HouseService houseService;
-    private final List<Bedroom> bedroomList;
+    private final Summarizer summarizer;
+    private final HouseSummariesService houseSummariesService;
 
     @Autowired
-    public Window(HouseService houseService, List<Bedroom> bedroomList) {
-        this.houseService = houseService;
-        this.bedroomList = bedroomList;
+    public Window(Summarizer summarizer, HouseSummariesService houseSummariesService) {
+        this.summarizer = summarizer;
+        this.houseSummariesService = houseSummariesService;
     }
 
     public void showMainWindow() {
@@ -52,6 +55,12 @@ public class Window {
 //            System.out.println(liczbaPokoi + liczba);
 
 //        });
+
+        System.out.println("Start");
+
+        System.out.println(summarizer.generateDatabaseSummaries().toString());
+
+        System.out.println("Koniec");
 
     }
 }
