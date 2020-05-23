@@ -17,7 +17,6 @@ public class NormalPrice implements Price {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(230000.0, 285000.0, 395000.0, 450000.0));
         this.membershipFunctions.add(new TriangularFunction(230000.0, 340000.0, 450000.0));
-        this.membershipFunctions.add(new GaussianFunction(230000.0, 340000.0, 450000.0));
     }
 
     @Override

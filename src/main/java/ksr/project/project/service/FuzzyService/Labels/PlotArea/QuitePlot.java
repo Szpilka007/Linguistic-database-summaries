@@ -17,7 +17,6 @@ public class QuitePlot implements PlotArea {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(19000.0, 36750.0, 72250.0, 90000.0));
         this.membershipFunctions.add(new TriangularFunction(19000.0, 54500.0, 90000.0));
-        this.membershipFunctions.add(new GaussianFunction(19000.0, 54500.0, 90000.0));
     }
 
     @Override

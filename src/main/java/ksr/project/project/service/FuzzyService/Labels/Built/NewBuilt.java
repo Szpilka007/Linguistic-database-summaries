@@ -17,7 +17,6 @@ public class NewBuilt implements Built {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(0.0, 6.25, 18.75, 25.0));
         this.membershipFunctions.add(new TriangularFunction(0.0, 12.5, 25.0));
-        this.membershipFunctions.add(new GaussianFunction(0.0, 12.5, 25.0));
     }
 
     @Override

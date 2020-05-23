@@ -17,7 +17,6 @@ public class OldBuilt implements Built {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(50.0, 58.75, 76.25, 85.0));
         this.membershipFunctions.add(new TriangularFunction(50.0, 67.5, 85.0));
-        this.membershipFunctions.add(new GaussianFunction(50.0, 67.5, 85.0));
     }
 
     @Override

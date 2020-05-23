@@ -17,7 +17,6 @@ public class ManyBathroom implements Bathroom {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(2.5, 3.0, 4.0, 4.5));
         this.membershipFunctions.add(new TriangularFunction(2.5, 3.5, 4.5));
-        this.membershipFunctions.add(new GaussianFunction(2.5, 3.5, 4.5));
     }
 
     @Override

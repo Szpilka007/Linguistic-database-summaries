@@ -17,7 +17,6 @@ public class HotelBedroom implements Bedroom {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(9.0, 15.0, 27.0, 33.0));
         this.membershipFunctions.add(new TriangularFunction(9.0, 21.0, 33.0));
-        this.membershipFunctions.add(new GaussianFunction(9.0, 21.0, 33.0));
     }
 
     @Override

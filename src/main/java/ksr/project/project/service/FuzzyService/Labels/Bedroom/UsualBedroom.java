@@ -17,7 +17,6 @@ public class UsualBedroom implements Bedroom {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(1.0, 1.75, 3.25, 4.0));
         this.membershipFunctions.add(new TriangularFunction(1.0, 2.5, 4.0));
-        this.membershipFunctions.add(new GaussianFunction(1.0, 2.5, 4.0));
     }
 
     @Override

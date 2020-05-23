@@ -1,8 +1,5 @@
 package ksr.project.project.service.FuzzyService.MembershipFunctions;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-
 public class TriangularFunction implements MembershipFunction {
 
     private double a, b, c;
@@ -31,5 +28,13 @@ public class TriangularFunction implements MembershipFunction {
         return MembershipFunType.TRIANGULAR;
     }
 
+    @Override
+    public double getCardinality() {
+        return (c - a) / 2;
+    }
 
+    @Override
+    public double getSupport() {
+        return c - a;
+    }
 }

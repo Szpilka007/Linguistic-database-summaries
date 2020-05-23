@@ -17,7 +17,6 @@ public class HighPrice implements Price {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(400000.0, 525000.0, 775000.0, 900000.0));
         this.membershipFunctions.add(new TriangularFunction(400000.0, 650000.0, 900000.0));
-        this.membershipFunctions.add(new GaussianFunction(400000.0, 650000.0, 900000.0));
     }
 
     @Override

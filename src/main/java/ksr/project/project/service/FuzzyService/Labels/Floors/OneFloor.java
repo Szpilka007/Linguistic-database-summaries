@@ -17,7 +17,6 @@ public class OneFloor implements Floors {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(1.0, 1.2, 1.6, 1.75));
         this.membershipFunctions.add(new TriangularFunction(1.0, 1.4, 1.75));
-        this.membershipFunctions.add(new GaussianFunction(1.0, 1.4, 1.75));
     }
 
     @Override

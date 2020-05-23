@@ -1,7 +1,5 @@
 package ksr.project.project.service.FuzzyService.MembershipFunctions;
 
-import org.springframework.stereotype.Component;
-
 public class TrapezoidalFunction implements MembershipFunction {
 
     private double a, b, c, d;
@@ -29,4 +27,13 @@ public class TrapezoidalFunction implements MembershipFunction {
         return MembershipFunType.TRAPEZOIDAL;
     }
 
+    @Override
+    public double getCardinality() {
+        return ((d - a) + (c - b)) / 2;
+    }
+
+    @Override
+    public double getSupport() {
+        return d - a;
+    }
 }

@@ -17,7 +17,6 @@ public class ExtremelyBasement implements BasementArea {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(3000.0, 3455.0, 4365.0, 4820.0));
         this.membershipFunctions.add(new TriangularFunction(3000.0, 3910.0, 4820.0));
-        this.membershipFunctions.add(new GaussianFunction(3000.0, 3910.0, 4820.0));
     }
 
     @Override

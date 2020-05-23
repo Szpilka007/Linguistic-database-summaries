@@ -17,7 +17,6 @@ public class CommonBuilt implements Built {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(20.0, 30.0, 50.0, 60.0));
         this.membershipFunctions.add(new TriangularFunction(20.0, 40.0, 60.0));
-        this.membershipFunctions.add(new GaussianFunction(20.0, 40.0, 60.0));
     }
 
     @Override

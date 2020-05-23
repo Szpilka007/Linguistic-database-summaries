@@ -17,7 +17,6 @@ public class MonumentBuilt implements Built {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(80.0, 90.0, 110.0, 120.0));
         this.membershipFunctions.add(new TriangularFunction(80.0, 100.0, 120.0));
-        this.membershipFunctions.add(new GaussianFunction(80.0, 100.0, 120.0));
     }
 
     @Override

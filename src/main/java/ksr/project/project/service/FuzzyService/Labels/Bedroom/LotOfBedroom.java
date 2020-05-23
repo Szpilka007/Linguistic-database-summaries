@@ -17,7 +17,6 @@ public class LotOfBedroom implements Bedroom {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(3.0, 4.75, 8.25, 10.0));
         this.membershipFunctions.add(new TriangularFunction(3.0, 6.5, 10.0));
-        this.membershipFunctions.add(new GaussianFunction(3.0, 6.5, 10.0));
     }
 
     @Override

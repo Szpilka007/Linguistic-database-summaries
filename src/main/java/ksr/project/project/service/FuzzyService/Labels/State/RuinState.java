@@ -17,7 +17,6 @@ public class RuinState implements State {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(0.8, 0.9, 1.1, 1.3));
         this.membershipFunctions.add(new TriangularFunction(0.8, 1.0, 1.3));
-        this.membershipFunctions.add(new GaussianFunction(0.8, 1.0, 1.3));
     }
 
     @Override

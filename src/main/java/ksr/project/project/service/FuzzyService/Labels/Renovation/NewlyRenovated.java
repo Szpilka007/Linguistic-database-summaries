@@ -17,7 +17,7 @@ public class NewlyRenovated implements Renovation {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(4.0, 6.5, 11.5, 14.0));
         this.membershipFunctions.add(new TriangularFunction(4.0, 9.0, 14.0));
-        this.membershipFunctions.add(new GaussianFunction(4.0, 9.0, 14.0));
+
     }
 
     @Override

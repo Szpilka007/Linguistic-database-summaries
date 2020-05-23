@@ -17,7 +17,6 @@ public class WellState implements State {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(3.8, 3.9, 4.1, 4.3));
         this.membershipFunctions.add(new TriangularFunction(3.8, 4.0, 4.3));
-        this.membershipFunctions.add(new GaussianFunction(3.8, 4.0, 4.3));
     }
 
     @Override

@@ -17,7 +17,6 @@ public class AverageAttic implements AtticArea {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(1000.0, 1750.0, 3250.0, 4000.0));
         this.membershipFunctions.add(new TriangularFunction(1000.0, 2500.0, 4000.0));
-        this.membershipFunctions.add(new GaussianFunction(1000.0, 2500.0, 4000.0));
     }
 
     @Override

@@ -17,7 +17,6 @@ public class QuiteAttic implements AtticArea {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(3800.0, 4162.5, 4887.5, 5250.0));
         this.membershipFunctions.add(new TriangularFunction(3800.0, 4525.0, 5250.0));
-        this.membershipFunctions.add(new GaussianFunction(3800.0, 4525.0, 5250.0));
     }
 
     @Override
