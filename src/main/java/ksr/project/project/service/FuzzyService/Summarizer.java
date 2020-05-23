@@ -2,14 +2,13 @@ package ksr.project.project.service.FuzzyService;
 
 import ksr.project.project.model.AttributeSummary;
 import ksr.project.project.model.entity.HouseEntity;
-import ksr.project.project.model.entity.HouseSummary;
+import ksr.project.project.model.entity.HouseSummaryEntity;
 import ksr.project.project.model.enums.Attributes;
 import ksr.project.project.service.FuzzyService.Labels.Label;
 import ksr.project.project.service.FuzzyService.Labels.LabelService;
 import ksr.project.project.service.HouseService;
 import ksr.project.project.service.HouseSummariesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
@@ -45,7 +44,6 @@ public class Summarizer {
 
                 ArrayList<AttributeSummary> attributeSummaries = new ArrayList<>();
                 labels.forEach(label -> {
-
                     if (attribute.name().equals(label.getAttribute().name())) {
                         try {
                             Field field = HouseEntity.class.getDeclaredField(attribute.name());
@@ -67,13 +65,142 @@ public class Summarizer {
                         .ifPresent(attributeSummaryList::add);
             });
 
-            houseSummariesService.addHouseSummaries(HouseSummary.builder()
+            houseSummariesService.addHouseSummaries(HouseSummaryEntity.builder()
                     .houseId(houseEntity.getId())
-                    .attributeSummaryList(attributeSummaryList.toString())
+                    .priceDescription(attributeSummaryList
+                            .stream()
+                            .filter(attributeSummary ->
+                                    attributeSummary.getAttributes().name().equals(Attributes.price.name()))
+                            .findFirst().get().getDescription())
+                    .priceMembership(attributeSummaryList
+                            .stream()
+                            .filter(attributeSummary ->
+                                    attributeSummary.getAttributes().name().equals(Attributes.price.name()))
+                            .findFirst().get().getMembership())
+                    .bedroomDescription(attributeSummaryList
+                            .stream()
+                            .filter(attributeSummary ->
+                                    attributeSummary.getAttributes().name().equals(Attributes.bedroom.name()))
+                            .findFirst().get().getDescription())
+                    .bedroomsMembership(attributeSummaryList
+                            .stream()
+                            .filter(attributeSummary ->
+                                    attributeSummary.getAttributes().name().equals(Attributes.bedroom.name()))
+                            .findFirst().get().getMembership())
+                    .bathroomDescription(attributeSummaryList
+                            .stream()
+                            .filter(attributeSummary ->
+                                    attributeSummary.getAttributes().name().equals(Attributes.bathroom.name()))
+                            .findFirst().get().getDescription())
+                    .bathroomMembership(attributeSummaryList
+                            .stream()
+                            .filter(attributeSummary ->
+                                    attributeSummary.getAttributes().name().equals(Attributes.bathroom.name()))
+                            .findFirst().get().getMembership())
+                    .residentAreaDescription(attributeSummaryList
+                            .stream()
+                            .filter(attributeSummary ->
+                                    attributeSummary.getAttributes().name().equals(Attributes.residentArea.name()))
+                            .findFirst().get().getDescription())
+                    .residentAreaMembership(attributeSummaryList
+                            .stream()
+                            .filter(attributeSummary ->
+                                    attributeSummary.getAttributes().name().equals(Attributes.residentArea.name()))
+                            .findFirst().get().getMembership())
+                    .viewDescription(attributeSummaryList
+                            .stream()
+                            .filter(attributeSummary ->
+                                    attributeSummary.getAttributes().name().equals(Attributes.view.name()))
+                            .findFirst().get().getDescription())
+                    .viewMembership(attributeSummaryList
+                            .stream()
+                            .filter(attributeSummary ->
+                                    attributeSummary.getAttributes().name().equals(Attributes.view.name()))
+                            .findFirst().get().getMembership())
+                    .floorDescription(attributeSummaryList
+                            .stream()
+                            .filter(attributeSummary ->
+                                    attributeSummary.getAttributes().name().equals(Attributes.floors.name()))
+                            .findFirst().get().getDescription())
+                    .floorMembership(attributeSummaryList
+                            .stream()
+                            .filter(attributeSummary ->
+                                    attributeSummary.getAttributes().name().equals(Attributes.floors.name()))
+                            .findFirst().get().getMembership())
+                    .viewDescription(attributeSummaryList
+                            .stream()
+                            .filter(attributeSummary ->
+                                    attributeSummary.getAttributes().name().equals(Attributes.view.name()))
+                            .findFirst().get().getDescription())
+                    .viewMembership(attributeSummaryList
+                            .stream()
+                            .filter(attributeSummary ->
+                                    attributeSummary.getAttributes().name().equals(Attributes.view.name()))
+                            .findFirst().get().getMembership())
+                    .stateDescription(attributeSummaryList
+                            .stream()
+                            .filter(attributeSummary ->
+                                    attributeSummary.getAttributes().name().equals(Attributes.state.name()))
+                            .findFirst().get().getDescription())
+                    .stateMembership(attributeSummaryList
+                            .stream()
+                            .filter(attributeSummary ->
+                                    attributeSummary.getAttributes().name().equals(Attributes.state.name()))
+                            .findFirst().get().getMembership())
+                    .plotAreaDescription(attributeSummaryList
+                            .stream()
+                            .filter(attributeSummary ->
+                                    attributeSummary.getAttributes().name().equals(Attributes.plotArea.name()))
+                            .findFirst().get().getDescription())
+                    .plotAreaMembership(attributeSummaryList
+                            .stream()
+                            .filter(attributeSummary ->
+                                    attributeSummary.getAttributes().name().equals(Attributes.plotArea.name()))
+                            .findFirst().get().getMembership())
+                    .atticAreaDescription(attributeSummaryList
+                            .stream()
+                            .filter(attributeSummary ->
+                                    attributeSummary.getAttributes().name().equals(Attributes.atticArea.name()))
+                            .findFirst().get().getDescription())
+                    .atticAreaMembership(attributeSummaryList
+                            .stream()
+                            .filter(attributeSummary ->
+                                    attributeSummary.getAttributes().name().equals(Attributes.atticArea.name()))
+                            .findFirst().get().getMembership())
+                    .basementAreaDescription(attributeSummaryList
+                            .stream()
+                            .filter(attributeSummary ->
+                                    attributeSummary.getAttributes().name().equals(Attributes.basementArea.name()))
+                            .findFirst().get().getDescription())
+                    .basementAreaMembership(attributeSummaryList
+                            .stream()
+                            .filter(attributeSummary ->
+                                    attributeSummary.getAttributes().name().equals(Attributes.basementArea.name()))
+                            .findFirst().get().getMembership())
+                    .builtDescription(attributeSummaryList
+                            .stream()
+                            .filter(attributeSummary ->
+                                    attributeSummary.getAttributes().name().equals(Attributes.built.name()))
+                            .findFirst().get().getDescription())
+                    .builtMembership(attributeSummaryList
+                            .stream()
+                            .filter(attributeSummary ->
+                                    attributeSummary.getAttributes().name().equals(Attributes.built.name()))
+                            .findFirst().get().getMembership())
+                    .renovationDescription(attributeSummaryList
+                            .stream()
+                            .filter(attributeSummary ->
+                                    attributeSummary.getAttributes().name().equals(Attributes.renovation.name()))
+                            .findFirst().get().getDescription())
+                    .renovationMembership(attributeSummaryList
+                            .stream()
+                            .filter(attributeSummary ->
+                                    attributeSummary.getAttributes().name().equals(Attributes.renovation.name()))
+                            .findFirst().get().getMembership())
                     .build());
         });
 
-}
+    }
 
 //    public DatabaseSummaries generateDatabaseSummaries() {
 //        List<HouseSummaries> houseSummaries = this.houseSummariesService.getAllHouseSummaries();
