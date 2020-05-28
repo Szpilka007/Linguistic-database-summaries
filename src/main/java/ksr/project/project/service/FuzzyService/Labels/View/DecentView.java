@@ -17,7 +17,6 @@ public class DecentView implements View {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(1.75, 2.0, 2.7, 3.0));
         this.membershipFunctions.add(new TriangularFunction(1.75, 2.4, 3.0));
-        this.membershipFunctions.add(new GaussianFunction(1.75, 2.4, 3.0));
     }
 
     @Override

@@ -17,7 +17,6 @@ public class ImpressiveView implements View {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(2.75, 3.0, 3.7, 4.0));
         this.membershipFunctions.add(new TriangularFunction(2.75, 3.4, 4.0));
-        this.membershipFunctions.add(new GaussianFunction(2.75, 3.4, 4.0));
     }
 
     @Override

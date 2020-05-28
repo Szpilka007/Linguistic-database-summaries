@@ -17,7 +17,6 @@ public class QuiteBasement implements BasementArea {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(2300.0,2525.0,2975.0,3200.0));
         this.membershipFunctions.add(new TriangularFunction(2300.0,2750.0,3200.0));
-        this.membershipFunctions.add(new GaussianFunction(2300.0,2750.0,3200.0));
     }
 
     @Override

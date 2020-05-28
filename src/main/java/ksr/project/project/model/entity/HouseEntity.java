@@ -10,8 +10,8 @@ import javax.persistence.*;
 @Entity
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "Houses")
 public class HouseEntity {
 

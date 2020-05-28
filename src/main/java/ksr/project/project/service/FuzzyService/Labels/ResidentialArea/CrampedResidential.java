@@ -17,7 +17,6 @@ public class CrampedResidential implements ResidentialArea {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(0.0, 200.0, 600.0, 800.0));
         this.membershipFunctions.add(new TriangularFunction(0.0, 400.0, 800.0));
-        this.membershipFunctions.add(new GaussianFunction(0.0, 400.0, 800.0));
     }
 
     @Override

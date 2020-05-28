@@ -17,7 +17,6 @@ public class UsualBathroom implements Bathroom {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(1.0, 1.5, 2.5, 3.0));
         this.membershipFunctions.add(new TriangularFunction(1.0, 2.0, 3.0));
-        this.membershipFunctions.add(new GaussianFunction(1.0, 2.0, 3.0));
     }
 
     @Override

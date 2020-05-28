@@ -1,8 +1,7 @@
 package ksr.project.project.service;
 
-import ksr.project.project.model.entity.HouseSummaries;
+import ksr.project.project.model.entity.HouseSummaryEntity;
 import ksr.project.project.repository.HouseSummariesRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,15 +17,15 @@ public class HouseSummariesService {
         this.houseSummariesRepository = houseSummariesRepository;
     }
 
-    public HouseSummaries addHouseSummaries(HouseSummaries houseSummaries){
+    public HouseSummaryEntity addHouseSummaries(HouseSummaryEntity houseSummaries){
          return this.houseSummariesRepository.save(houseSummaries);
     }
 
-    public List<HouseSummaries> getAllHouseSummaries(){
+    public List<HouseSummaryEntity> getAllHouseSummaries(){
         return this.houseSummariesRepository.findAll();
     }
 
-    public HouseSummaries getHouseSummaries(Long id){
+    public HouseSummaryEntity getHouseSummaries(Long id){
         return this.houseSummariesRepository.getOne(id);
     }
 

@@ -17,7 +17,6 @@ public class LongOrNotRenovated implements Renovation {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(38.0, 60.0, 86.0, 2020.0));
         this.membershipFunctions.add(new TriangularFunction(38.0, 90.0, 2020.0));
-        this.membershipFunctions.add(new GaussianFunction(38.0, 90.0, 2020.0));
     }
 
     @Override

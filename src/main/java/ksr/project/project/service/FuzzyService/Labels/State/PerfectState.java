@@ -17,7 +17,6 @@ public class PerfectState implements State {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(4.8, 4.9, 5.1, 5.3));
         this.membershipFunctions.add(new TriangularFunction(4.8, 5.0, 5.3));
-        this.membershipFunctions.add(new GaussianFunction(4.8, 5.0, 5.3));
     }
 
     @Override

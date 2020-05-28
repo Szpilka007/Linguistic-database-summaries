@@ -17,7 +17,6 @@ public class AverageBasement implements BasementArea {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(1000.0, 1350.0, 2050.0, 2400.0));
         this.membershipFunctions.add(new TriangularFunction(1000.0, 1700.0, 2400.0));
-        this.membershipFunctions.add(new GaussianFunction(1000.0, 1700.0, 2400.0));
     }
 
     @Override

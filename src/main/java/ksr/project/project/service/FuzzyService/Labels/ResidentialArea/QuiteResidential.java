@@ -17,7 +17,6 @@ public class QuiteResidential implements ResidentialArea {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(3400.0, 4550.0, 6850.0, 8000.0));
         this.membershipFunctions.add(new TriangularFunction(3400.0, 5700.0, 8000.0));
-        this.membershipFunctions.add(new GaussianFunction(3400.0, 5700.0, 8000.0));
     }
 
     @Override

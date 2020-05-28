@@ -17,7 +17,6 @@ public class LittleBedroom implements Bedroom {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(0.0, 0.75, 2.25, 3.0));
         this.membershipFunctions.add(new TriangularFunction(0.0, 1.5, 3.0));
-        this.membershipFunctions.add(new GaussianFunction(0.0, 1.5, 3.0));
     }
 
     @Override

@@ -17,7 +17,6 @@ public class CrampedPlot implements PlotArea {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(0.0, 1000.0, 3000.0, 4000.0));
         this.membershipFunctions.add(new TriangularFunction(0.0, 2000.0, 4000.0));
-        this.membershipFunctions.add(new GaussianFunction(0.0, 2000.0, 4000.0));
     }
 
     @Override

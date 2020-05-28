@@ -17,7 +17,6 @@ public class TightPlot implements PlotArea {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(3000.0, 4750.0, 8250.0, 10000.0));
         this.membershipFunctions.add(new TriangularFunction(3000.0, 6500.0, 10000.0));
-        this.membershipFunctions.add(new GaussianFunction(3000.0, 6500.0, 10000.0));
     }
 
     @Override

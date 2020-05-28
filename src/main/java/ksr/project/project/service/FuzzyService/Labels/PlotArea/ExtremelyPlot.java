@@ -17,7 +17,6 @@ public class ExtremelyPlot implements PlotArea {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(75000.0,94000.0,132000.0,151359.0));
         this.membershipFunctions.add(new TriangularFunction(75000.0, 113000.0, 151359.0));
-        this.membershipFunctions.add(new GaussianFunction(75000.0, 113000.0, 151359.0));
     }
 
     @Override

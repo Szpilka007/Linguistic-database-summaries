@@ -17,7 +17,6 @@ public class RichlyBathroom implements Bathroom {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(4.0, 5.0, 7.0, 8.0));
         this.membershipFunctions.add(new TriangularFunction(4.0, 6.0, 8.0));
-        this.membershipFunctions.add(new GaussianFunction(4.0, 6.0, 8.0));
     }
 
     @Override

@@ -17,7 +17,6 @@ public class ManyFloor implements Floors {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(1.5, 2.125, 3.375, 4.0));
         this.membershipFunctions.add(new TriangularFunction(1.5, 2.75, 4.0));
-        this.membershipFunctions.add(new GaussianFunction(1.5, 2.75, 4.0));
     }
 
     @Override

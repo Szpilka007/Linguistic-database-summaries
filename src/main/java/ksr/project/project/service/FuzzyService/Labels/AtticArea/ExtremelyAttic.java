@@ -17,7 +17,6 @@ public class ExtremelyAttic implements AtticArea {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(5000.0, 6102.5, 8307.5, 9410.0));
         this.membershipFunctions.add(new TriangularFunction(5000.0, 7205.0, 9410.0));
-        this.membershipFunctions.add(new GaussianFunction(5000.0, 7205.0, 9410.0));
     }
 
     @Override

@@ -17,7 +17,6 @@ public class NeglectedState implements State {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(1.8, 1.9, 2.1, 2.3));
         this.membershipFunctions.add(new TriangularFunction(1.8, 2.0, 2.3));
-        this.membershipFunctions.add(new GaussianFunction(1.8, 2.0, 2.3));
     }
 
     @Override

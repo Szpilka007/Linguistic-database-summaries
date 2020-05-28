@@ -17,7 +17,6 @@ public class PoorBathroom implements Bathroom {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(0.0, 0.5, 1.5, 2.0));
         this.membershipFunctions.add(new TriangularFunction(0.0, 1.0, 2.0));
-        this.membershipFunctions.add(new GaussianFunction(0.0, 1.0, 2.0));
     }
 
     @Override

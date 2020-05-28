@@ -17,7 +17,6 @@ public class ExtremelyResidential implements ResidentialArea {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(7500.0, 9010.0, 12030.0, 13540.0));
         this.membershipFunctions.add(new TriangularFunction(7500.0, 10520.0, 13540.0));
-        this.membershipFunctions.add(new GaussianFunction(7500.0, 10520.0, 13540.0));
     }
 
     @Override

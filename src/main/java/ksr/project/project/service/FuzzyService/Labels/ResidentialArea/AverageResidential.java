@@ -17,7 +17,6 @@ public class AverageResidential implements ResidentialArea {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(1600.0, 2075.0, 3025.0, 3500.0));
         this.membershipFunctions.add(new TriangularFunction(1600.0, 2550.0, 3500.0));
-        this.membershipFunctions.add(new GaussianFunction(1600.0, 2550.0, 3500.0));
     }
 
     @Override

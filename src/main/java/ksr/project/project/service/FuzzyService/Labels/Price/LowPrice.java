@@ -17,7 +17,6 @@ public class LowPrice implements Price {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(110000.0, 145000.0, 215000.0, 250000.0));
         this.membershipFunctions.add(new TriangularFunction(110000.0, 180000.0, 250000.0));
-        this.membershipFunctions.add(new GaussianFunction(110000.0, 180000.0, 250000.0));
     }
 
     @Override

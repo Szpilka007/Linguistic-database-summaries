@@ -17,7 +17,6 @@ public class AveragePlot implements PlotArea {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(9000.0, 11750.0, 17250.0, 20000.0));
         this.membershipFunctions.add(new TriangularFunction(9000.0, 14500.0, 20000.0));
-        this.membershipFunctions.add(new GaussianFunction(9000.0, 14500.0, 20000.0));
     }
 
     @Override

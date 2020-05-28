@@ -17,7 +17,6 @@ public class NormalState implements State {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(2.8, 2.9, 3.1, 3.3));
         this.membershipFunctions.add(new TriangularFunction(2.8, 3.0, 3.3));
-        this.membershipFunctions.add(new GaussianFunction(2.8, 3.0, 3.3));
     }
 
     @Override

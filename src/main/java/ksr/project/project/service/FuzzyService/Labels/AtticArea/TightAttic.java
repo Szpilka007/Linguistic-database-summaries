@@ -17,7 +17,6 @@ public class TightAttic implements AtticArea {
         this.membershipFunctions = new ArrayList<>();
         this.membershipFunctions.add(new TrapezoidalFunction(400.0, 600.0, 1000.0, 1200.0));
         this.membershipFunctions.add(new TriangularFunction(400.0, 800.0, 1200.0));
-        this.membershipFunctions.add(new GaussianFunction(400.0, 800.0, 1200.0));
     }
 
     @Override
