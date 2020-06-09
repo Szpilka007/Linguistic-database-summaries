@@ -2,7 +2,7 @@ package ksr.project.project.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import ksr.project.project.service.CsvParserService;
+import ksr.project.project.service.utils.CsvParserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
