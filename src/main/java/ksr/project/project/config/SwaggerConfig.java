@@ -21,7 +21,6 @@ package ksr.project.project.config;
 
 import com.fasterxml.classmate.TypeResolver;
 import io.swagger.annotations.Api;
-import ksr.project.project.model.entity.HouseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -30,13 +29,10 @@ import org.springframework.hateoas.client.LinkDiscoverers;
 import org.springframework.hateoas.mediatype.collectionjson.CollectionJsonLinkDiscoverer;
 import org.springframework.http.ResponseEntity;
 import org.springframework.plugin.core.SimplePluginRegistry;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.async.DeferredResult;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.builders.ResponseMessageBuilder;
-import springfox.documentation.schema.ModelRef;
 import springfox.documentation.schema.WildcardType;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
@@ -78,8 +74,7 @@ public class SwaggerConfig {
                                 typeResolver.resolve(ResponseEntity.class, WildcardType.class)),
                                 typeResolver.resolve(WildcardType.class)))
                 .useDefaultResponseMessages(false)
-                .enableUrlTemplating(true)
-                .additionalModels(typeResolver.resolve(HouseEntity.class));
+                .enableUrlTemplating(true);
     }
 
     private ApiInfo apiEndpointsInfo() {

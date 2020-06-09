@@ -2,8 +2,8 @@ package ksr.project.project.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import ksr.project.project.model.entity.HouseEntity;
-import ksr.project.project.service.HouseService;
+import ksr.project.project.model.entity.House;
+import ksr.project.project.service.utils.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +28,7 @@ public class HouseController {
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Get house with id")
-    public ResponseEntity<HouseEntity> getHouse(@RequestParam Long id){
+    public ResponseEntity<House> getHouse(@RequestParam Long id){
         return ResponseEntity.status(HttpStatus.OK).body(this.houseService.getHouse(id));
     }
 
@@ -36,7 +36,7 @@ public class HouseController {
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Get all houses")
-    public ResponseEntity<List<HouseEntity>> getAllHouse(){
+    public ResponseEntity<List<House>> getAllHouse(){
         return ResponseEntity.status(HttpStatus.OK).body(this.houseService.getAllHouses());
     }
 

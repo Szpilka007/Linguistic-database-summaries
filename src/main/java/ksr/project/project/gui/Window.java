@@ -1,9 +1,8 @@
 package ksr.project.project.gui;
 
-import ksr.project.project.model.enums.Attributes;
-import ksr.project.project.service.FuzzyService.Labels.LabelService;
-import ksr.project.project.service.FuzzyService.MembershipFunctions.MembershipFunType;
-import ksr.project.project.service.FuzzyService.Summarizer;
+//import ksr.project.project.service.FuzzyService.Summarizer;
+import ksr.project.project.model.entity.AttributeSummary;
+import ksr.project.project.service.fuzzy.AttributeSummaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +12,16 @@ import java.awt.*;
 @Service
 public class Window {
 
-    private final LabelService labelService;
-    private final Summarizer summarizer;
+//    private final LabelService labelService;
+//    private final Summarizer summarizer;
+
+    private final AttributeSummaryService attributeSummaryService;
 
     @Autowired
-    public Window(LabelService labelService, Summarizer summarizer) {
-        this.labelService = labelService;
-        this.summarizer = summarizer;
+    public Window(AttributeSummaryService attributeSummaryService) {
+        this.attributeSummaryService = attributeSummaryService;
+//        this.labelService = labelService;
+//        this.summarizer = summarizer;
     }
 
     public void showMainWindow() {
@@ -34,7 +36,7 @@ public class Window {
 
 
         System.out.println("Start");
-        summarizer.generateSummaries();
+//        summarizer.generateSummaries();
         System.out.println("Koniec");
 
     }
