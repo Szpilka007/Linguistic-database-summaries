@@ -3,6 +3,8 @@ package ksr.project.project.gui.models.tabs.buttonPanels;
 import ksr.project.project.model.entity.Quantifier;
 import ksr.project.project.model.enums.Attribute;
 import ksr.project.project.model.enums.MembershipFunType;
+import ksr.project.project.service.fuzzy.QuantifierService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.swing.*;
@@ -22,6 +24,8 @@ public class AddQuantifier extends JPanel implements ActionListener {
     private TextField functionPointD;
     private JCheckBox absolute;
 
+    @Autowired
+    private QuantifierService quantifierService;
 
     public AddQuantifier() {
 
@@ -78,5 +82,6 @@ public class AddQuantifier extends JPanel implements ActionListener {
                 .pointD(Double.parseDouble(functionPointD.getText()))
                 .build();
 
+        quantifierService.addQuantifier(quantifier);
     }
 }
