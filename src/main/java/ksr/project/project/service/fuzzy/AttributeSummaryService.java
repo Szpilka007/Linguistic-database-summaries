@@ -73,4 +73,18 @@ public class AttributeSummaryService {
         return support;
     }
 
+    public MembershipFunction getMembershipFunction(AttributeSummary attributeSummary){
+        return attributeSummary.getMembershipFunType().getMembershipFunction(
+                attributeSummary.getPointA(),
+                attributeSummary.getPointB(),
+                attributeSummary.getPointC(),
+                attributeSummary.getPointD()
+        );
+    }
+
+    // in(S)
+    public double getDegreeOfFuzzines(AttributeSummary attributeSummary){
+        return getMembershipFunction(attributeSummary).getSupport() / houseService.countHouses();
+    }
+
 }

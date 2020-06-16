@@ -2,6 +2,7 @@ package ksr.project.project.gui.models;
 
 import ksr.project.project.gui.models.tabs.AdvancedUserTab;
 import ksr.project.project.gui.models.tabs.SimpleUserTab;
+import ksr.project.project.gui.models.tabs.SummaryFirstType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,6 +26,13 @@ public class Tabs extends JPanel {
                 panel2.setLayout(new GridLayout());
                 jtp.addTab("Advanced User", null, panel2,"Tab 2 tooltip");
                 jtp.setMnemonicAt(0, KeyEvent.VK_2);
+
+                JPanel panel3 = new JPanel();
+
+                panel3.add(new SummaryFirstType());
+                panel3.setLayout(new GridLayout());
+                jtp.addTab("Single Summary First Type", null, panel3,"Tab 3 tooltip");
+                jtp.setMnemonicAt(0, KeyEvent.VK_3);
 
                 frame.getContentPane().add(jtp);
             });
