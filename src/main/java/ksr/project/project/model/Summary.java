@@ -1,6 +1,7 @@
 package ksr.project.project.model;
 
 import ksr.project.project.model.entity.AttributeSummary;
+import ksr.project.project.model.entity.Qualifier;
 import ksr.project.project.model.entity.Quantifier;
 import ksr.project.project.model.enums.SummaryType;
 import lombok.AllArgsConstructor;

@@ -1,8 +1,12 @@
 package ksr.project.project.gui.models.tabs.buttonPanels;
 
-import ksr.project.project.model.Qualifier;
+import ksr.project.project.model.entity.Qualifier;
 import ksr.project.project.model.entity.AttributeSummary;
+import ksr.project.project.model.enums.Attribute;
 import ksr.project.project.model.enums.MembershipFunType;
+import ksr.project.project.service.fuzzy.AttributeSummaryService;
+import ksr.project.project.service.fuzzy.QualifierService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.swing.*;
@@ -21,8 +25,13 @@ public class AddQualifier extends JPanel implements ActionListener {
     private TextField functionPointC;
     private TextField functionPointD;
 
-    public AddQualifier() {
 
+    AttributeSummaryService attributeSummaryService;
+    QualifierService qualifierService;
+
+    public AddQualifier(AttributeSummaryService attributeSummaryService, QualifierService qualifierService) {
+        this.attributeSummaryService = attributeSummaryService;
+        this.qualifierService = qualifierService;
 
         quantifierTextField = new TextField(40);
         quantifierTextField.setText("Enter your qualifier name");
@@ -33,7 +42,7 @@ public class AddQualifier extends JPanel implements ActionListener {
         JLabel membershipLabel = new JLabel("Select membership function");
         add(membershipLabel);
 
-        String[] functions = {"Trapezoidal Function", "Triangular Function"};
+        String[] functions = { "TRAPEZOIDAL","TRIANGULAR"};
 
         functionSelect = new JList<>(functions);
         add(functionSelect);
@@ -62,16 +71,21 @@ public class AddQualifier extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        AttributeSummary attributeSummary = attributeSummaryService.addAttributeSummary(AttributeSummary.builder()
+                .name(quantifierTextField.getText())
+                .membershipFunType(MembershipFunType.valueOf(functionSelect.getSelectedValue()))
+                .pointA(Double.parseDouble(functionPointA.getText()))
+                .pointB(Double.parseDouble(functionPointB.getText()))
+                .pointC(Double.parseDouble(functionPointC.getText()))
+                .pointD(Double.parseDouble(functionPointD.getText())).build());
+
+
+        System.out.println(attributeSummary);
         Qualifier qualifier = Qualifier.builder()
-                .attributeSummary(
-                        AttributeSummary.builder()
-                                .name(quantifierTextField.getText())
-                                .membershipFunType(MembershipFunType.valueOf(functionSelect.getSelectedValue()))
-                                .pointA(Double.parseDouble(functionPointA.getText()))
-                                .pointB(Double.parseDouble(functionPointB.getText()))
-                                .pointC(Double.parseDouble(functionPointC.getText()))
-                                .pointD(Double.parseDouble(functionPointD.getText())).build())
-                .build();
+                .idAttributeSummary(attributeSummary.getId_attribute_summary()).build();
+
+        qualifierService.addQualifier(qualifier);
 
     }
 }

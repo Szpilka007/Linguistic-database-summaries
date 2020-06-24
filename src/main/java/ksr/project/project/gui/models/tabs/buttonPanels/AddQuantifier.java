@@ -1,10 +1,9 @@
 package ksr.project.project.gui.models.tabs.buttonPanels;
 
 import ksr.project.project.model.entity.Quantifier;
-import ksr.project.project.model.enums.Attribute;
 import ksr.project.project.model.enums.MembershipFunType;
+import ksr.project.project.service.fuzzy.AttributeSummaryService;
 import ksr.project.project.service.fuzzy.QuantifierService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.swing.*;
@@ -24,15 +23,16 @@ public class AddQuantifier extends JPanel implements ActionListener {
     private TextField functionPointD;
     private JCheckBox absolute;
 
-    @Autowired
+
     private QuantifierService quantifierService;
 
-    public AddQuantifier() {
+    public AddQuantifier(QuantifierService quantifierService) {
 
+        this.quantifierService = quantifierService;
 
         quantifierTextField = new TextField(40);
         quantifierTextField.setText("Enter your quantifier name");
-        quantifierTextField.setBounds(0,0,20,20);
+        quantifierTextField.setBounds(0, 0, 20, 20);
         add(quantifierTextField);
 
         absolute = new JCheckBox("Absolute");
@@ -42,7 +42,7 @@ public class AddQuantifier extends JPanel implements ActionListener {
         JLabel membershipLabel = new JLabel("Select membership function");
         add(membershipLabel);
 
-        String[] functions = { "Trapezoidal Function","Triangular Function"};
+        String[] functions = {"TRAPEZOIDAL", "TRIANGULAR"};
 
         functionSelect = new JList<>(functions);
         add(functionSelect);

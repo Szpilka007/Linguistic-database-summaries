@@ -4,7 +4,6 @@ import ksr.project.project.model.entity.AttributeSummary;
 import ksr.project.project.model.enums.Attribute;
 import ksr.project.project.model.enums.MembershipFunType;
 import ksr.project.project.service.fuzzy.AttributeSummaryService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.swing.*;
@@ -24,11 +23,11 @@ public class AddSummarizer extends JPanel implements ActionListener {
     private TextField functionPointD;
 
 
-    @Autowired
     private AttributeSummaryService attributeSummaryService;
 
-    @Autowired
-    public AddSummarizer() {
+
+    public AddSummarizer(AttributeSummaryService attributeSummaryService) {
+        this.attributeSummaryService = attributeSummaryService;
 
         quantifierTextField = new TextField(40);
         quantifierTextField.setText("Enter your summarizer name");
@@ -39,8 +38,8 @@ public class AddSummarizer extends JPanel implements ActionListener {
         JLabel columnLabel = new JLabel("Select Column");
         add(columnLabel);
 
-        String[] week = { "Attic Area","Basement Area","Bathroom","Bedroom","Built","Floors","PlotArea","Price","Renovation"
-                ,"Residential Area", "State","View"};
+        String[] week = { "ATTIC_AREA","BASEMENT_AREA","BATHROOM","BEDROOM","BUILDING_AGE","FLOOR","GARDEN_AREA","PRICE","RENOVATION_AGE"
+                ,"RESIDENTIAL_AREA", "STATE","VIEW"};
 
         columnSelect = new JList<>(week);
         add(columnSelect);
@@ -50,7 +49,7 @@ public class AddSummarizer extends JPanel implements ActionListener {
         JLabel membershipLabel = new JLabel("Select membership function");
         add(membershipLabel);
 
-        String[] functions = { "Trapezoidal Function","Triangular Function"};
+        String[] functions = {"TRAPEZOIDAL", "TRIANGULAR"};
 
         functionSelect = new JList<>(functions);
         add(functionSelect);

@@ -1,6 +1,6 @@
 package ksr.project.project.service.summary;
 
-import ksr.project.project.model.Qualifier;
+import ksr.project.project.model.entity.Qualifier;
 import ksr.project.project.model.Summary;
 import ksr.project.project.model.entity.*;
 import ksr.project.project.model.enums.SummaryType;

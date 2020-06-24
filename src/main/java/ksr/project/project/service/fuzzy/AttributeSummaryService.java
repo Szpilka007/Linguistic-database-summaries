@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AttributeSummaryService {
@@ -45,12 +46,16 @@ public class AttributeSummaryService {
     }
 
     @Transactional
-    public void addAttributeSummary(AttributeSummary attributeSummary){
-        attributeSummaryRepository.save(attributeSummary);
+    public AttributeSummary addAttributeSummary(AttributeSummary attributeSummary){
+        return attributeSummaryRepository.save(attributeSummary);
     }
 
     public List<AttributeSummary> getAllAttributeSummary(){
         return attributeSummaryRepository.findAll();
+    }
+
+    public Optional<AttributeSummary> getAttributeSummary(Long id) {
+        return attributeSummaryRepository.findById(id);
     }
 
     public List<House> getSupport(AttributeSummary attributeSummary) {

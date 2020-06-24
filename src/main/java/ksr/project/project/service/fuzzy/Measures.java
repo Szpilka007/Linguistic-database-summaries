@@ -1,19 +1,16 @@
 package ksr.project.project.service.fuzzy;
 
-import ksr.project.project.model.Qualifier;
 import ksr.project.project.model.Summary;
 import ksr.project.project.model.entity.AttributeSummary;
 import ksr.project.project.model.entity.House;
 import ksr.project.project.model.enums.Attribute;
 import ksr.project.project.model.enums.SummaryType;
 import ksr.project.project.service.memberships.MembershipFunction;
-import ksr.project.project.service.summary.Summarizer;
 import ksr.project.project.service.utils.HouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -73,7 +70,7 @@ public class Measures {
             double rCounter = 0.0;
             double rDenominator = Double.MIN_NORMAL;
             Attribute attributeSingle = summary.getAttributeSummary().get(0).getAttribute();
-            Attribute qualifierAttribute = summary.getQualifier().getAttributeSummary().getAttribute();
+            Attribute qualifierAttribute = attributeSummaryService.getAttributeSummary(summary.getQualifier().getId()).get().getAttribute();
             for (House house : houseService.getAllHouses()) {
                 double uS1 = summaryFunOne.getMembership(houseService.getAttributeHouseValue(house, attributeSingle));
                 double uW = qualifierFun.getMembership(houseService.getAttributeHouseValue(house, qualifierAttribute));
@@ -140,7 +137,7 @@ public class Measures {
         if (summary.getSummaryType().equals(SummaryType.SINGLE_SUBJECT_SECOND) && summary.getQualifier() != null) {
             double tSum = 0.0;
             double hSum = 0.0;
-            Attribute attrQualifier = summary.getQualifier().getAttributeSummary().getAttribute();
+            Attribute attrQualifier = attributeSummaryService.getAttributeSummary(summary.getQualifier().getId()).get().getAttribute();
             Attribute attrSummary = summary.getAttributeSummary().get(0).getAttribute();
             for (House house : houseService.getAllHouses()) {
                 if (qualifierFun.getMembership(houseService.getAttributeHouseValue(house, attrQualifier)) > 0
