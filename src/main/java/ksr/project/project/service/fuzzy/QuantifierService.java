@@ -35,4 +35,12 @@ public class QuantifierService {
                 quantifier.getPointD()
         );
     }
+
+    public Quantifier returnQuantifierByName(String name){
+        return quantifierRepository.findAll()
+                .stream()
+                .filter(quantifier -> quantifier.getName().equals(name))
+                .findFirst()
+                .orElseThrow(()-> new RuntimeException("Quantifier not found"));
+    }
 }

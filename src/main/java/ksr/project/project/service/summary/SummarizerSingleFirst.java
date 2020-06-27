@@ -33,14 +33,12 @@ public class SummarizerSingleFirst implements Summarizer {
     public Summary generateSummary(SummaryType summaryType, List<AttributeSummary> attributeSummary,
                                    Quantifier quantifier, Qualifier qualifier) {
 
-        Summary summary = Summary.builder()
+        return Summary.builder()
                 .summaryType(summaryType)
                 .attributeSummary(attributeSummary)
                 .quantifier(quantifier)
                 .qualifier(qualifier)
                 .build();
-
-        return summary;
     }
 
 }

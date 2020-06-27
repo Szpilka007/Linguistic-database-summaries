@@ -58,6 +58,14 @@ public class AttributeSummaryService {
         return attributeSummaryRepository.findById(id);
     }
 
+    public AttributeSummary returnAttributeSummaryByName(String name){
+        return attributeSummaryRepository.findAll()
+                .stream()
+                .filter(quantifier -> quantifier.getName().equals(name))
+                .findFirst()
+                .orElseThrow(()-> new RuntimeException("Quantifier not found"));
+    }
+
     public List<House> getSupport(AttributeSummary attributeSummary) {
 
         MembershipFunction membershipFunction = attributeSummary.getMembershipFunType()

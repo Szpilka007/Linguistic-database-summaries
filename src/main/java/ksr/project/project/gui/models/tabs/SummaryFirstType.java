@@ -1,9 +1,12 @@
 package ksr.project.project.gui.models.tabs;
 
 import ksr.project.project.model.entity.AttributeSummary;
+import ksr.project.project.model.entity.Qualifier;
 import ksr.project.project.model.entity.Quantifier;
+import ksr.project.project.model.enums.SummaryType;
 import ksr.project.project.service.fuzzy.AttributeSummaryService;
 import ksr.project.project.service.fuzzy.QuantifierService;
+import ksr.project.project.service.summary.SummarizerSingleFirst;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +14,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +24,7 @@ public class SummaryFirstType extends JPanel implements ActionListener {
 
     QuantifierService quantifierService;
     AttributeSummaryService attributeSummaryService;
+    SummarizerSingleFirst summarizerSingleFirst;
 
     private JLabel labelSingleSummary;
     private JLabel labelQuantificators;
@@ -31,10 +36,11 @@ public class SummaryFirstType extends JPanel implements ActionListener {
     private JButton refreshButton;
 
 
-    public SummaryFirstType(AttributeSummaryService attributeSummaryService, QuantifierService quantifierService) {
+    public SummaryFirstType(AttributeSummaryService attributeSummaryService, QuantifierService quantifierService, SummarizerSingleFirst summarizerSingleFirst) {
 
         this.attributeSummaryService = attributeSummaryService;
         this.quantifierService = quantifierService;
+        this.summarizerSingleFirst = summarizerSingleFirst;
         //construct preComponents
         String[] s1_quantificatorsItems = {};
         String[] s1_attrsumItems = {};
@@ -89,6 +95,21 @@ public class SummaryFirstType extends JPanel implements ActionListener {
                     .collect(Collectors.toList());
            s1_quantificators.setListData(collect.toArray());
            s1_attrsum.setListData(summarizerCollection.toArray());
+        }
+
+        if (e.getActionCommand().equals("Generate")) {
+            String attributeSummary = s1_attrsum.getSelectedValue().toString();
+            String quantifier = s1_quantificators.getSelectedValue().toString();
+            List<AttributeSummary> attributeSummaries = new ArrayList<>();
+            attributeSummaries.add(attributeSummaryService.returnAttributeSummaryByName(attributeSummary));
+            summarizerSingleFirst.getLinguisticSummary(
+                    summarizerSingleFirst.generateSummary(
+                            SummaryType.SINGLE_SUBJECT_FIRST,
+                            attributeSummaries,
+                            quantifierService.returnQuantifierByName(quantifier),
+                            Qualifier.builder()
+                                    .idAttributeSummary(attributeSummaryService.returnAttributeSummaryByName(attributeSummary)
+                                            .getId_attribute_summary()).build()));
         }
     }
 

@@ -7,6 +7,7 @@ import ksr.project.project.model.entity.AttributeSummary;
 import ksr.project.project.service.fuzzy.AttributeSummaryService;
 import ksr.project.project.service.fuzzy.QualifierService;
 import ksr.project.project.service.fuzzy.QuantifierService;
+import ksr.project.project.service.summary.SummarizerSingleFirst;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,12 +17,14 @@ public class Tabs extends JPanel {
 
     private final AttributeSummaryService attributeSummaryService;
     private final QuantifierService quantifierService;
+    private final SummarizerSingleFirst summarizerSingleFirst;
     private final QualifierService qualifierService;
 
-    public Tabs(AttributeSummaryService attributeSummaryService, QuantifierService quantifierService, QualifierService qualifierService) {
+    public Tabs(AttributeSummaryService attributeSummaryService, QuantifierService quantifierService, QualifierService qualifierService,SummarizerSingleFirst summarizerSingleFirst) {
         this.attributeSummaryService = attributeSummaryService;
         this.quantifierService = quantifierService;
         this.qualifierService = qualifierService;
+        this.summarizerSingleFirst = summarizerSingleFirst;
     }
 
     public void init(JFrame frame) {
@@ -43,7 +46,7 @@ public class Tabs extends JPanel {
 
                 JPanel panel3 = new JPanel();
 
-                panel3.add(new SummaryFirstType(attributeSummaryService,quantifierService));
+                panel3.add(new SummaryFirstType(attributeSummaryService,quantifierService,summarizerSingleFirst));
                 panel3.setLayout(new GridLayout());
                 jtp.addTab("Single Summary First Type", null, panel3,"Tab 3 tooltip");
                 jtp.setMnemonicAt(0, KeyEvent.VK_3);
