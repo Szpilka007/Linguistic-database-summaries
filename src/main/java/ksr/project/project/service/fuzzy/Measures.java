@@ -4,6 +4,7 @@ import ksr.project.project.model.Summary;
 import ksr.project.project.model.entity.AttributeSummary;
 import ksr.project.project.model.entity.House;
 import ksr.project.project.model.enums.Attribute;
+import ksr.project.project.model.enums.Conjunction;
 import ksr.project.project.model.enums.SummaryType;
 import ksr.project.project.service.memberships.MembershipFunction;
 import ksr.project.project.service.utils.HouseService;
@@ -93,7 +94,12 @@ public class Measures {
             for (House house : houseService.getAllHouses()) {
                 double uS1 = summaryFunOne.getMembership(houseService.getAttributeHouseValue(house, attributeOne));
                 double uS2 = summaryFunTwo.getMembership(houseService.getAttributeHouseValue(house, attributeTwo));
-                r += Math.min(uS1, uS2);
+                if (summary.getConjunction().equals(Conjunction.AND)) {
+                    r += Math.min(uS1, uS2);
+                }
+                if (summary.getConjunction().equals(Conjunction.OR)) {
+                    r += Math.max(uS1, uS2);
+                }
             }
             if (summary.getQuantifier().isAbsolute()) {
                 return quantifierFun.getMembership(r);
@@ -183,29 +189,29 @@ public class Measures {
             double gSum = 0.0;
             for (House house : houseService.getAllHouses()) {
                 double attValue = houseService.getAttributeHouseValue(house, attributeSummary.getAttribute());
-                if(attributeSummaryService.getMembershipFunction(attributeSummary).getMembership(attValue) > 0) {
+                if (attributeSummaryService.getMembershipFunction(attributeSummary).getMembership(attValue) > 0) {
                     gSum += 1.0;
                 }
             }
-            rList.add(gSum/houseService.countHouses());
+            rList.add(gSum / houseService.countHouses());
         }
-        return Math.abs(rList.stream().reduce((a,b)-> a*b).get()-t3);
+        return Math.abs(rList.stream().reduce((a, b) -> a * b).get() - t3);
     }
 
     // T5
-    public Double getLengthOfSummary(Summary summary){
-        return 2*Math.pow(0.5,summary.getAttributeSummary().size());
+    public Double getLengthOfSummary(Summary summary) {
+        return 2 * Math.pow(0.5, summary.getAttributeSummary().size());
     }
 
     // The optimal summary
-    public Double getOptimalSummary(Summary summary){
+    public Double getOptimalSummary(Summary summary) {
         // Sum of weights must be equal 1
-        Double[] weights = {0.45,0.25,0.15,0.10,0.05};
-        Double optimal = weights[0]*getDegreeOfTruth(summary) +
-                weights[1]*getDegreeOfImprecision(summary) +
-                weights[2]*getDegreeOfCovering(summary) +
-                weights[3]*getDegreeOfAppropriateness(summary) +
-                weights[4]*getLengthOfSummary(summary);
+        Double[] weights = {0.45, 0.25, 0.15, 0.10, 0.05};
+        Double optimal = weights[0] * getDegreeOfTruth(summary) +
+                weights[1] * getDegreeOfImprecision(summary) +
+                weights[2] * getDegreeOfCovering(summary) +
+                weights[3] * getDegreeOfAppropriateness(summary) +
+                weights[4] * getLengthOfSummary(summary);
         return optimal;
     }
 
@@ -223,27 +229,89 @@ public class Measures {
     }
 
     // T7
-    public Double getDegreeOfQuantifierCardinality(Summary summary){
+    public Double getDegreeOfQuantifierCardinality(Summary summary) {
         double clmQ = quantifierService.getMembershipFunction(summary.getQuantifier()).getCardinality();
-        if(summary.getQuantifier().isAbsolute()){
-            return 1 - (clmQ/houseService.countHouses());
+        if (summary.getQuantifier().isAbsolute()) {
+            return 1 - (clmQ / houseService.countHouses());
         } else {
-            return 1 - (clmQ/1.0);
+            return 1 - (clmQ / 1.0);
         }
     }
 
     // T8
-//    public Double getDegreeOfSummarizerCardinality(Summary summary){
-//        Double cardS1 = attributeSummaryService.getMembershipFunction(summary.getAttributeSummary().get(0)).getCardinality();
-//        Double cardS2 = null;
-//        if(summary.getSummaryType().equals(SummaryType.MULTI_SUBJECT)){
-//            cardS2 = attributeSummaryService.getMembershipFunction(summary.getAttributeSummary().get(1)).getCardinality();
-//        }
-//        return null;
-//    }
+    public Double getDegreeOfSummarizerCardinality(Summary summary) {
+        Double cardS1 = attributeSummaryService.getMembershipFunction(summary.getAttributeSummary().get(0)).getCardinality();
+        Double cardS2 = null;
+        if (summary.getSummaryType().equals(SummaryType.MULTI_SUBJECT)) {
+            cardS2 = attributeSummaryService.getMembershipFunction(summary.getAttributeSummary().get(1)).getCardinality();
+        }
+        if (summary.getSummaryType().equals(SummaryType.MULTI_SUBJECT)) {
+            return 1.0 - Math.pow((cardS1 / houseService.countHouses()) * (cardS2 / houseService.countHouses()), 0.5);
+        }
+        return 1.0 - (cardS1 / houseService.countHouses());
+    }
 
     // T9
-//    public Double
+    public Double getDegreeOfQualifierImprecision(Summary summary) {
+        if (!summary.getSummaryType().equals(SummaryType.SINGLE_SUBJECT_SECOND)) {
+            return 1.0;
+        }
 
+        // uW
+        MembershipFunction qualifierFun = qualifierService.getMembershipFunction(summary.getQualifier());
 
+        Double inW1 = qualifierFun.getSupport() / houseService.countHouses();
+        return 1.0 - inW1;
+    }
+
+    // T10
+    public Double getDegreeOfQualifierCardinality(Summary summary) {
+        if (!summary.getSummaryType().equals(SummaryType.SINGLE_SUBJECT_SECOND)) {
+            return 1.0;
+        }
+
+        // uW
+        MembershipFunction qualifierFun = qualifierService.getMembershipFunction(summary.getQualifier());
+
+        return 1.0 - (qualifierFun.getCardinality() / houseService.countHouses());
+    }
+
+    // T11
+    public Double getLengthOfQualifier(Summary summary) {
+        return 2 * Math.pow(0.5, 1); // always in app we have only one qualifier (multi only for S)
+    }
+
+    // Extended optimal summary
+    public Double getExtendedOptimalSummary(Summary summary) {
+        Double oneWeightForAll = getDegreeOfTruth(summary) +
+                getDegreeOfImprecision(summary) +
+                getDegreeOfCovering(summary) +
+                getDegreeOfAppropriateness(summary) +
+                getLengthOfSummary(summary) +
+                getDegreeOfQuantifierImprecision(summary) +
+                getDegreeOfQuantifierCardinality(summary) +
+                getDegreeOfSummarizerCardinality(summary) +
+                getDegreeOfQualifierImprecision(summary) +
+                getDegreeOfQualifierCardinality(summary);
+        return oneWeightForAll * 0.1; // without T11, because in app is always equal 1
+    }
+
+    public String allMeasuresToString(Summary summary) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("T1  = %5.5f", getDegreeOfTruth(summary))).append("\n");
+        sb.append(String.format("T2  = %5.5f", getDegreeOfImprecision(summary))).append("\n");
+        sb.append(String.format("T3  = %5.5f", getDegreeOfCovering(summary))).append("\n");
+        sb.append(String.format("T4  = %5.5f", getDegreeOfAppropriateness(summary))).append("\n");
+        sb.append(String.format("T5  = %5.5f", getLengthOfSummary(summary))).append("\n");
+        sb.append(String.format("T6  = %5.5f", getDegreeOfQuantifierImprecision(summary))).append("\n");
+        sb.append(String.format("T7  = %5.5f", getDegreeOfQuantifierCardinality(summary))).append("\n");
+        sb.append(String.format("T8  = %5.5f", getDegreeOfSummarizerCardinality(summary))).append("\n");
+        sb.append(String.format("T9  = %5.5f", getDegreeOfQualifierImprecision(summary))).append("\n");
+        sb.append(String.format("T10 = %5.5f", getDegreeOfQualifierCardinality(summary))).append("\n");
+        sb.append(String.format("T11 = %5.5f", getLengthOfQualifier(summary))).append("\n");
+        sb.append("---").append("\n");
+        sb.append(String.format("OPTIMAL (1 - 5)  = %5.5f", getOptimalSummary(summary))).append("\n");
+        sb.append(String.format("OPTIMAL (1 - 10) = %5.5f", getExtendedOptimalSummary(summary))).append("\n");
+        return sb.toString();
+    }
 }

@@ -4,6 +4,7 @@ import ksr.project.project.model.entity.AttributeSummary;
 import ksr.project.project.model.entity.Qualifier;
 import ksr.project.project.model.entity.Quantifier;
 import ksr.project.project.model.Summary;
+import ksr.project.project.model.enums.Conjunction;
 import ksr.project.project.model.enums.SummaryType;
 import org.springframework.stereotype.Service;
 
@@ -31,13 +32,14 @@ public class SummarizerSingleFirst implements Summarizer {
 
     @Override
     public Summary generateSummary(SummaryType summaryType, List<AttributeSummary> attributeSummary,
-                                   Quantifier quantifier, Qualifier qualifier) {
+                                   Quantifier quantifier, Qualifier qualifier, Conjunction conjunction) {
 
         return Summary.builder()
                 .summaryType(summaryType)
                 .attributeSummary(attributeSummary)
                 .quantifier(quantifier)
                 .qualifier(qualifier)
+                .conjunction(conjunction)
                 .build();
     }
 
