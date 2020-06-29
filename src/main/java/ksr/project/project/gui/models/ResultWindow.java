@@ -1,10 +1,5 @@
 package ksr.project.project.gui.models;
 
-import ksr.project.project.model.Summary;
-import ksr.project.project.service.fuzzy.Measures;
-import ksr.project.project.service.summary.Summarizer;
-import ksr.project.project.service.summary.SummarizerSingleFirst;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
@@ -33,6 +28,8 @@ public class ResultWindow extends JPanel implements ActionListener {
         add(jcomp1);
         add(jcomp2);
         add(jcomp3);
+
+//        jcomp1.setText(attributeSummary + " " + quantifier + " " + measures);
 
         //set component bounds (only needed by Absolute Positioning)
         jcomp1.setBounds(5, 30, 605, 300);
