@@ -164,6 +164,16 @@ public class Measures {
             Attribute attrSummaryTwo = null;
             if (summary.getSummaryType().equals(SummaryType.MULTI_SUBJECT)) {
                 attrSummaryTwo = summary.getAttributeSummary().get(1).getAttribute();
+
+                for (House house : houseService.getAllHouses()) {
+                    hSum += 1.0;
+
+                    if (summaryFunOne.getMembership(houseService.getAttributeHouseValue(house, attrSummaryOne)) > 0
+                            || summaryFunTwo.getMembership(houseService.getAttributeHouseValue(house, attrSummaryTwo)) > 0) {
+                        tSum += 1.0;
+                    }
+                }
+                return tSum / hSum;
             }
 
             for (House house : houseService.getAllHouses()) {
