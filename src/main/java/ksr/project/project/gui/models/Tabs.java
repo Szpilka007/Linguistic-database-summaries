@@ -1,9 +1,6 @@
 package ksr.project.project.gui.models;
 
-import ksr.project.project.gui.models.tabs.AdvancedUserTab;
-import ksr.project.project.gui.models.tabs.SimpleUserTab;
-import ksr.project.project.gui.models.tabs.SummaryFirstType;
-import ksr.project.project.gui.models.tabs.SummarySecondType;
+import ksr.project.project.gui.models.tabs.*;
 import ksr.project.project.model.entity.AttributeSummary;
 import ksr.project.project.service.fuzzy.AttributeSummaryService;
 import ksr.project.project.service.fuzzy.Measures;
@@ -71,6 +68,14 @@ public class Tabs extends JPanel {
                 panel4.setLayout(new GridLayout());
                 jtp.addTab("Single Summary Second Type", null, panel4,"Tab 4 tooltip");
                 jtp.setMnemonicAt(0, KeyEvent.VK_4);
+
+                JPanel panel5 = new JPanel();
+
+                panel5.add(new SummaryMultiType(attributeSummaryService,quantifierService, qualifierService, measures,
+                        summarizerMulti));
+                panel5.setLayout(new GridLayout());
+                jtp.addTab("Multi Summary", null, panel5,"Tab 5 tooltip");
+                jtp.setMnemonicAt(0, KeyEvent.VK_5);
 
                 frame.getContentPane().add(jtp);
             });
