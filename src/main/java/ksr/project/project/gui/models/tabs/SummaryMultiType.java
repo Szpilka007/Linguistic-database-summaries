@@ -1,5 +1,10 @@
 package ksr.project.project.gui.models.tabs;
 
+import ksr.project.project.service.fuzzy.AttributeSummaryService;
+import ksr.project.project.service.fuzzy.Measures;
+import ksr.project.project.service.fuzzy.QualifierService;
+import ksr.project.project.service.fuzzy.QuantifierService;
+import ksr.project.project.service.summary.SummarizerMulti;
 import lombok.SneakyThrows;
 
 import javax.swing.*;
@@ -22,7 +27,8 @@ public class SummaryMultiType extends JPanel implements ActionListener {
     private JButton ref_button;
     private JButton save_button;
 
-    public SummaryMultiType() {
+    public SummaryMultiType(AttributeSummaryService attributeSummaryService, QuantifierService quantifierService,
+                            QualifierService qualifierService, Measures measures, SummarizerMulti summarizerMulti) {
         //construct preComponents
         String[] q_listItems = {};
         String[] s1_listItems = {};
