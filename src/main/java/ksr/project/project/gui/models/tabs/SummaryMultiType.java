@@ -130,12 +130,12 @@ public class SummaryMultiType extends JPanel implements ActionListener {
         }
 
         if (e.getActionCommand().equals("Generate")) {
-            String attributeSummaryFromList = s1_list.getSelectedValue().toString();
-            String attributeSummaryFromList1 = s2_list.getSelectedValue().toString();
+            String attributeSummaryFromList1 = s1_list.getSelectedValue().toString();
+            String attributeSummaryFromList2 = s2_list.getSelectedValue().toString();
             String quantifier = q_list.getSelectedValue().toString();
             java.util.List<AttributeSummary> attributeSummaries = new ArrayList<>();
-            AttributeSummary attributeSummary1 = attributeSummaryService.returnAttributeSummaryByName(attributeSummaryFromList);
-            AttributeSummary attributeSummary2 = attributeSummaryService.returnAttributeSummaryByName(attributeSummaryFromList1);
+            AttributeSummary attributeSummary1 = attributeSummaryService.returnAttributeSummaryByName(attributeSummaryFromList1);
+            AttributeSummary attributeSummary2 = attributeSummaryService.returnAttributeSummaryByName(attributeSummaryFromList2);
             attributeSummaries.add(attributeSummary1);
             attributeSummaries.add(attributeSummary2);
 
@@ -147,7 +147,7 @@ public class SummaryMultiType extends JPanel implements ActionListener {
                     quantifierService.returnQuantifierByName(quantifier),null, conjunction1);
             String summary = measures.allMeasuresToString(summarySecondType);
             JOptionPane.showMessageDialog(this,
-                    quantifier + " are/have " + attributeSummaryFromList +  " " + attributeSummary1.getAttribute() + " \n Measures: \n" + summary);
+                    quantifier + " are/have " + attributeSummaryFromList1 + " " + conjunction1.toString() + " " + attributeSummaryFromList2 + attributeSummary1.getAttribute() + " \n Measures: \n" + summary);
         }
 
         else if (e.getActionCommand().equals("SAVE")) {
@@ -167,7 +167,7 @@ public class SummaryMultiType extends JPanel implements ActionListener {
                     attributeSummaries,
                     quantifierService.returnQuantifierByName(quantifier),null, conjunction1);
             String summary = measures.allMeasuresToString(summarySecondType);
-            String str = quantifier + " are/have " + attributeSummaryFromList1 + " " + attributeSummary1.getAttribute() + " \n Measures: \n" + summary;
+            String str = quantifier + " are/have " + attributeSummaryFromList1 + " " + conjunction1.toString() + " " + attributeSummaryFromList2 + attributeSummary1.getAttribute() + " \n Measures: \n" + summary;
             BufferedWriter writer = new BufferedWriter(new FileWriter("file.txt"));
             writer.write(str);
 

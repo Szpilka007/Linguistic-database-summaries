@@ -42,11 +42,6 @@ public class Tabs extends JPanel {
             SwingUtilities.invokeAndWait(() -> {
                 JTabbedPane jtp = new JTabbedPane();
 
-                JPanel panel1 = new JPanel(false);
-                panel1.add(new SimpleUserTab());
-                jtp.addTab("Simple User", null, panel1,"Tab 1 tooltip");
-                jtp.setMnemonicAt(0, KeyEvent.VK_1);
-
                 JPanel panel2 = new JPanel();
 
                 panel2.add(new AdvancedUserTab(attributeSummaryService,quantifierService,qualifierService));
