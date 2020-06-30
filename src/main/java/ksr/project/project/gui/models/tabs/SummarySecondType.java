@@ -1,5 +1,6 @@
 package ksr.project.project.gui.models.tabs;
 
+import ksr.project.project.model.Summary;
 import ksr.project.project.model.entity.AttributeSummary;
 import ksr.project.project.model.entity.Qualifier;
 import ksr.project.project.model.entity.Quantifier;
@@ -68,6 +69,9 @@ public class SummarySecondType extends JPanel implements ActionListener {
         gen_button = new JButton("Generate");
         ref_button = new JButton("REFRESH");
 
+        ref_button.addActionListener(this);
+        gen_button.addActionListener(this);
+
         //set components properties
         head_label.setEnabled(false);
 
@@ -113,21 +117,25 @@ public class SummarySecondType extends JPanel implements ActionListener {
                     .map(AttributeSummary::getName).collect(Collectors.toList());
             q_list.setListData(collect.toArray());
             s_list.setListData(summarizerCollection.toArray());
-            w_list.setListData(collect.toArray());
+            w_list.setListData(summarizerCollection.toArray());
         }
 
         if (e.getActionCommand().equals("Generate")) {
-            String attributeSummary = s_list.getSelectedValue().toString();
+            String attributeSummaryFromList = s_list.getSelectedValue().toString();
             String quantifier = q_list.getSelectedValue().toString();
+            String qualifier = w_list.getSelectedValue().toString();
             List<AttributeSummary> attributeSummaries = new ArrayList<>();
-            attributeSummaries.add(attributeSummaryService.returnAttributeSummaryByName(attributeSummary));
-//            summarizerSingleSecond.getLinguisticSummary(
-//                    summarizerSingleFirst.generateSummary(
-//                            SummaryType.SINGLE_SUBJECT_FIRST,
-//                            attributeSummaries,
-//                            quantifierService.returnQuantifierByName(quantifier),
-//                            Qualifier.builder().idAttributeSummary(attributeSummaryService.returnAttributeSummaryByName(attributeSummary)
-//                                    .getId_attribute_summary()).build(), null));
+            AttributeSummary attributeSummary1 = attributeSummaryService.returnAttributeSummaryByName(attributeSummaryFromList);
+            Qualifier qualifier1 = new Qualifier();
+            qualifier1.setAttributeSummary(attributeSummaryService.returnAttributeSummaryByName(qualifier));
+            attributeSummaries.add(attributeSummary1);
+            Summary summarySecondType = summarizerSingleSecond.generateSummary(
+                            SummaryType.SINGLE_SUBJECT_SECOND,
+                            attributeSummaries,
+                            quantifierService.returnQuantifierByName(quantifier),qualifier1, null);
+            String summary = measures.allMeasuresToString(summarySecondType);
+            JOptionPane.showMessageDialog(this,
+                    quantifier + " are/have " + attributeSummaryFromList +  " " + attributeSummary1.getAttribute() + " \n Measures: \n" + summary);
         }
     }
 

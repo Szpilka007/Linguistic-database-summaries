@@ -80,12 +80,7 @@ public class AddQualifier extends JPanel implements ActionListener {
                 .pointC(Double.parseDouble(functionPointC.getText()))
                 .pointD(Double.parseDouble(functionPointD.getText())).build());
 
-
-        System.out.println(attributeSummary);
-        Qualifier qualifier = Qualifier.builder()
-                .idAttributeSummary(attributeSummary.getId_attribute_summary()).build();
-
-        qualifierService.addQualifier(qualifier);
+        attributeSummaryService.addAttributeSummary(attributeSummary);
 
     }
 }

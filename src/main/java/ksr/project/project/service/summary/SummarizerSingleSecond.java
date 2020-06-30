@@ -25,7 +25,7 @@ public class SummarizerSingleSecond implements Summarizer {
         String quantifier = summary.getQuantifier().getName();
         String summarySubject = summary.getAttributeSummary().get(0).getAttribute().getLabel();
         String summaryValue = summary.getAttributeSummary().get(0).getName();
-        String qualifier = attributeSummaryService.getAttributeSummary(summary.getQualifier().getId()).get().getName();
+        String qualifier =  summary.getQualifier().getAttributeSummary().getAttribute().toString();
 
         sb.append(quantifier).append(" ");
         sb.append("houses").append(" "); // subject
