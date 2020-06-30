@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -112,13 +113,11 @@ public class Measures {
 
     // T2
     public double getDegreeOfImprecision(Summary summary) {
-        if (summary.getAttributeSummary().size() == 1) {
-            return 1 - attributeSummaryService.getDegreeOfFuzzines(summary.getAttributeSummary().get(0));
-        } else {
-            double product = summary.getAttributeSummary().stream()
-                    .map(i -> attributeSummaryService.getDegreeOfFuzzines(i)).reduce((a, b) -> a * b).get();
-            return 1 - Math.pow(product, summary.getAttributeSummary().size() * (-1.0));
-        }
+        double product = summary.getAttributeSummary().stream()
+                .map(i -> attributeSummaryService.getDegreeOfFuzzines(i)).reduce((a, b) -> a * b)
+                .orElseThrow(() -> new RuntimeException("Nie poprawne dane w miarze drugiej"));
+        return 1 - Math.pow(product, summary.getAttributeSummary().size() * (-1.0));
+
     }
 
     // T3
@@ -250,15 +249,17 @@ public class Measures {
 
     // T8
     public Double getDegreeOfSummarizerCardinality(Summary summary) {
-        Double cardS1 = attributeSummaryService.getMembershipFunction(summary.getAttributeSummary().get(0)).getCardinality();
-        Double cardS2 = null;
+        Double cardS1 = Math.abs(attributeSummaryService.getMembershipFunction(summary.getAttributeSummary().get(0)).getCardinality());
         if (summary.getSummaryType().equals(SummaryType.MULTI_SUBJECT)) {
-            cardS2 = attributeSummaryService.getMembershipFunction(summary.getAttributeSummary().get(1)).getCardinality();
-        }
-        if (summary.getSummaryType().equals(SummaryType.MULTI_SUBJECT)) {
+            Double cardS2 = attributeSummaryService.getMembershipFunction(summary.getAttributeSummary().get(1)).getCardinality();
             return 1.0 - Math.pow((cardS1 / houseService.countHouses()) * (cardS2 / houseService.countHouses()), 0.5);
         }
-        return 1.0 - (cardS1 / houseService.countHouses());
+
+        Double cardDivider = houseService.getAllHouses()
+                .stream()
+                .map(i -> houseService.getAttributeHouseValue(i, summary.getAttributeSummary().get(0).getAttribute()))
+                .max(Double::compare).get();
+        return 1.0 - Math.pow(cardS1 / cardDivider, 1.0 / attributeSummaryService.getAllAttributeSummary().size());
     }
 
     // T9
