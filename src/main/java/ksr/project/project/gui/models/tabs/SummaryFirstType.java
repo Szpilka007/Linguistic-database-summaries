@@ -105,7 +105,6 @@ public class SummaryFirstType extends JPanel implements ActionListener {
                     .collect(Collectors.toList());
             s1_quantificators.setListData(collect.toArray());
             s1_attrsum.setListData(summarizerCollection.toArray());
-            System.out.println("asd");
         }
 
         else if (e.getActionCommand().equals("GENERATE")) {

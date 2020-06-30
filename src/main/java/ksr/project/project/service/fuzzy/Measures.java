@@ -168,8 +168,8 @@ public class Measures {
 
             for (House house : houseService.getAllHouses()) {
                 hSum += 1.0;
-                if (summaryFunOne.getMembership(houseService.getAttributeHouseValue(house, attrSummaryOne)) > 0
-                        || summaryFunTwo.getMembership(houseService.getAttributeHouseValue(house, attrSummaryTwo)) > 0) {
+
+                if (summaryFunOne.getMembership(houseService.getAttributeHouseValue(house, attrSummaryOne)) > 0) {
                     tSum += 1.0;
                 }
             }
@@ -297,6 +297,7 @@ public class Measures {
     }
 
     public String allMeasuresToString(Summary summary) {
+
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("T1  = %5.5f", getDegreeOfTruth(summary))).append("\n");
         sb.append(String.format("T2  = %5.5f", getDegreeOfImprecision(summary))).append("\n");
