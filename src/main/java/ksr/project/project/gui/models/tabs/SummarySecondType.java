@@ -37,6 +37,7 @@ public class SummarySecondType extends JPanel implements ActionListener {
     private JLabel s_label;
     private JButton gen_button;
     private JButton ref_button;
+    private JButton sav_button;
 
     QuantifierService quantifierService;
     AttributeSummaryService attributeSummaryService;
@@ -70,9 +71,11 @@ public class SummarySecondType extends JPanel implements ActionListener {
         s_label = new JLabel("Attribute Summaries");
         gen_button = new JButton("Generate");
         ref_button = new JButton("REFRESH");
+        sav_button = new JButton("SAVE");
 
         ref_button.addActionListener(this);
         gen_button.addActionListener(this);
+        sav_button.addActionListener(this);
 
         //set components properties
         head_label.setEnabled(false);
@@ -93,6 +96,7 @@ public class SummarySecondType extends JPanel implements ActionListener {
         add(s_label);
         add(gen_button);
         add(ref_button);
+        add(sav_button);
 
         //set component bounds (only needed by Absolute Positioning)
         head_label.setBounds(5, 5, 720, 25);
@@ -106,6 +110,7 @@ public class SummarySecondType extends JPanel implements ActionListener {
         s_label.setBounds(435, 40, 140, 25);
         gen_button.setBounds(590, 95, 100, 25);
         ref_button.setBounds(590, 65, 100, 25);
+        sav_button.setBounds (590, 125, 100, 25);
 
     }
 
