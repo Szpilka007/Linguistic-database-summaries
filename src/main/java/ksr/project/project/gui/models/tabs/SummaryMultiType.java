@@ -103,13 +103,13 @@ public class SummaryMultiType extends JPanel implements ActionListener {
 
         //set component bounds (only needed by Absolute Positioning)
         summary_label.setBounds(5, 5, 720, 25);
-        q_list.setBounds(5, 55, 140, 95);
+        q_list.setBounds(5, 55, 140, 300);
         q_label.setBounds(5, 30, 100, 25);
         predicate_1.setBounds(150, 85, 100, 25);
         s1_label.setBounds(205, 30, 140, 25);
-        s1_list.setBounds(205, 55, 140, 95);
+        s1_list.setBounds(205, 55, 140, 300);
         conjunction.setBounds(350, 90, 100, 25);
-        s2_list.setBounds(460, 55, 140, 95);
+        s2_list.setBounds(460, 55, 140, 300);
         s2_label.setBounds(460, 30, 140, 25);
         gen_button.setBounds(605, 85, 100, 25);
         ref_button.setBounds (605, 55, 100, 25);
@@ -146,8 +146,9 @@ public class SummaryMultiType extends JPanel implements ActionListener {
                     attributeSummaries,
                     quantifierService.returnQuantifierByName(quantifier),null, conjunction1);
             String summary = measures.allMeasuresToString(summarySecondType);
+            String summaryText = summarizerMulti.getLinguisticSummary(summarySecondType);
             JOptionPane.showMessageDialog(this,
-                    quantifier + " are/have " + attributeSummaryFromList +  " " + attributeSummary1.getAttribute() + " \n Measures: \n" + summary);
+                    summaryText + " \n Measures: \n" + summary);
         }
 
         else if (e.getActionCommand().equals("SAVE")) {

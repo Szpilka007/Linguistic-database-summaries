@@ -86,9 +86,9 @@ public class SummaryFirstType extends JPanel implements ActionListener {
         //set component bounds (only needed by Absolute Positioning)
         labelSingleSummary.setBounds(5, 0, 445, 25);
         labelQuantificators.setBounds(5, 25, 140, 25);
-        s1_quantificators.setBounds(5, 50, 140, 95);
+        s1_quantificators.setBounds(5, 50, 140, 300);
         labelPredicate.setBounds(150, 80, 55, 25);
-        s1_attrsum.setBounds(210, 50, 140, 95);
+        s1_attrsum.setBounds(210, 50, 140, 3000);
         labelAttributeSummary.setBounds(210, 25, 140, 25);
         generateButton.setBounds(360, 80, 100, 25);
         refreshButton.setBounds(370, 5, 100, 25);

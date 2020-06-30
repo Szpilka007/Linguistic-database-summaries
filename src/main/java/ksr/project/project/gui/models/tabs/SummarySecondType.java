@@ -97,11 +97,11 @@ public class SummarySecondType extends JPanel implements ActionListener {
         //set component bounds (only needed by Absolute Positioning)
         head_label.setBounds(5, 5, 720, 25);
         q_label.setBounds(5, 35, 140, 25);
-        q_list.setBounds(5, 60, 140, 95);
+        q_list.setBounds(5, 60, 140, 3000);
         q_predicate_label.setBounds(150, 90, 75, 25);
-        w_list.setBounds(230, 60, 140, 95);
+        w_list.setBounds(230, 60, 140, 3000);
         s_predicate_label.setBounds(375, 90, 100, 25);
-        s_list.setBounds(435, 65, 140, 95);
+        s_list.setBounds(435, 65, 140, 3000);
         w_label.setBounds(230, 35, 140, 25);
         s_label.setBounds(435, 40, 140, 25);
         gen_button.setBounds(590, 95, 100, 25);
@@ -154,7 +154,7 @@ public class SummarySecondType extends JPanel implements ActionListener {
                     attributeSummaries,
                     quantifierService.returnQuantifierByName(quantifier),qualifier1, null);
             String summary = measures.allMeasuresToString(summarySecondType);
-            String str = quantifier + " are/have " + attributeSummary + " " + attributeSummary1.getAttribute() + " \n Measures: \n" + summary;
+            String str = summarizerSingleSecond.getLinguisticSummary(summarySecondType) + " \n Measures: \n" + summary;
             BufferedWriter writer = new BufferedWriter(new FileWriter("file.txt"));
             writer.write(str);
 
