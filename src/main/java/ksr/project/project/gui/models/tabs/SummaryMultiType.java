@@ -1,5 +1,11 @@
 package ksr.project.project.gui.models.tabs;
 
+import ksr.project.project.model.Summary;
+import ksr.project.project.model.entity.AttributeSummary;
+import ksr.project.project.model.entity.Qualifier;
+import ksr.project.project.model.entity.Quantifier;
+import ksr.project.project.model.enums.Conjunction;
+import ksr.project.project.model.enums.SummaryType;
 import ksr.project.project.service.fuzzy.AttributeSummaryService;
 import ksr.project.project.service.fuzzy.Measures;
 import ksr.project.project.service.fuzzy.QualifierService;
@@ -11,6 +17,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class SummaryMultiType extends JPanel implements ActionListener {
 
@@ -27,12 +39,26 @@ public class SummaryMultiType extends JPanel implements ActionListener {
     private JButton ref_button;
     private JButton save_button;
 
+    private AttributeSummaryService attributeSummaryService;
+    private QuantifierService quantifierService;
+    private QualifierService qualifierService;
+    private Measures measures;
+    private SummarizerMulti summarizerMulti;
+
     public SummaryMultiType(AttributeSummaryService attributeSummaryService, QuantifierService quantifierService,
                             QualifierService qualifierService, Measures measures, SummarizerMulti summarizerMulti) {
+
+        this.attributeSummaryService = attributeSummaryService;
+        this.quantifierService = quantifierService;
+        this.qualifierService = qualifierService;
+        this.measures = measures;
+        this.summarizerMulti = summarizerMulti;
+
+
         //construct preComponents
         String[] q_listItems = {};
         String[] s1_listItems = {};
-        String[] conjunctionItems = {};
+        String[] conjunctionItems = Arrays.stream(Conjunction.values()).map(Enum::name).toArray(String[]::new);
         String[] s2_listItems = {};
 
         //construct components
@@ -49,8 +75,13 @@ public class SummaryMultiType extends JPanel implements ActionListener {
         ref_button = new JButton("REFRESH");
         save_button = new JButton("SAVE");
 
+        gen_button.addActionListener(this);
+        ref_button.addActionListener(this);
+        save_button.addActionListener(this);
+
         //set components properties
         summary_label.setEnabled(false);
+
 
         //adjust size and set layout
         setPreferredSize(new Dimension(944, 574));
@@ -88,7 +119,60 @@ public class SummaryMultiType extends JPanel implements ActionListener {
     @SneakyThrows
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getActionCommand().equals("REFRESH")) {
+            java.util.List<String> collect = quantifierService.getAllQuantifiers().stream()
+                    .map(Quantifier::getName).collect(Collectors.toList());
+            java.util.List<String> summarizerCollection = attributeSummaryService.getAllAttributeSummary().stream()
+                    .map(AttributeSummary::getName).collect(Collectors.toList());
+            q_list.setListData(collect.toArray());
+            s2_list.setListData(summarizerCollection.toArray());
+            s1_list.setListData(summarizerCollection.toArray());
+        }
 
+        if (e.getActionCommand().equals("Generate")) {
+            String attributeSummaryFromList = s1_list.getSelectedValue().toString();
+            String attributeSummaryFromList1 = s2_list.getSelectedValue().toString();
+            String quantifier = q_list.getSelectedValue().toString();
+            java.util.List<AttributeSummary> attributeSummaries = new ArrayList<>();
+            AttributeSummary attributeSummary1 = attributeSummaryService.returnAttributeSummaryByName(attributeSummaryFromList);
+            AttributeSummary attributeSummary2 = attributeSummaryService.returnAttributeSummaryByName(attributeSummaryFromList1);
+            attributeSummaries.add(attributeSummary1);
+            attributeSummaries.add(attributeSummary2);
+
+            Conjunction conjunction1 = Conjunction.valueOf(conjunction.getSelectedItem().toString());
+
+            Summary summarySecondType = summarizerMulti.generateSummary(
+                    SummaryType.MULTI_SUBJECT,
+                    attributeSummaries,
+                    quantifierService.returnQuantifierByName(quantifier),null, conjunction1);
+            String summary = measures.allMeasuresToString(summarySecondType);
+            JOptionPane.showMessageDialog(this,
+                    quantifier + " are/have " + attributeSummaryFromList +  " " + attributeSummary1.getAttribute() + " \n Measures: \n" + summary);
+        }
+
+        else if (e.getActionCommand().equals("SAVE")) {
+            String attributeSummaryFromList1 = s1_list.getSelectedValue().toString();
+            String attributeSummaryFromList2 = s2_list.getSelectedValue().toString();
+            String quantifier = q_list.getSelectedValue().toString();
+            List<AttributeSummary> attributeSummaries = new ArrayList<>();
+            AttributeSummary attributeSummary1 = attributeSummaryService.returnAttributeSummaryByName(attributeSummaryFromList1);
+            AttributeSummary attributeSummary2 = attributeSummaryService.returnAttributeSummaryByName(attributeSummaryFromList2);
+            attributeSummaries.add(attributeSummary1);
+            attributeSummaries.add(attributeSummary2);
+
+            Conjunction conjunction1 = Conjunction.valueOf(conjunction.getSelectedItem().toString());
+
+            Summary summarySecondType = summarizerMulti.generateSummary(
+                    SummaryType.MULTI_SUBJECT,
+                    attributeSummaries,
+                    quantifierService.returnQuantifierByName(quantifier),null, conjunction1);
+            String summary = measures.allMeasuresToString(summarySecondType);
+            String str = quantifier + " are/have " + attributeSummaryFromList1 + " " + attributeSummary1.getAttribute() + " \n Measures: \n" + summary;
+            BufferedWriter writer = new BufferedWriter(new FileWriter("file.txt"));
+            writer.write(str);
+
+            writer.close();
+        }
     }
 
 }

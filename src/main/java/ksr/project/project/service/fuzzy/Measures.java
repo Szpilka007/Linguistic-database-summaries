@@ -252,7 +252,18 @@ public class Measures {
         Double cardS1 = Math.abs(attributeSummaryService.getMembershipFunction(summary.getAttributeSummary().get(0)).getCardinality());
         if (summary.getSummaryType().equals(SummaryType.MULTI_SUBJECT)) {
             Double cardS2 = attributeSummaryService.getMembershipFunction(summary.getAttributeSummary().get(1)).getCardinality();
-            return 1.0 - Math.pow((cardS1 / houseService.countHouses()) * (cardS2 / houseService.countHouses()), 0.5);
+
+            Double cardDivider = houseService.getAllHouses()
+                    .stream()
+                    .map(i -> houseService.getAttributeHouseValue(i, summary.getAttributeSummary().get(0).getAttribute()))
+                    .max(Double::compare).get();
+
+            Double cardDivider1 = houseService.getAllHouses()
+                    .stream()
+                    .map(i -> houseService.getAttributeHouseValue(i, summary.getAttributeSummary().get(1).getAttribute()))
+                    .max(Double::compare).get();
+
+            return 1.0 - Math.pow((cardS1 / cardDivider) * (cardS2 / cardDivider1), 0.5);
         }
 
         Double cardDivider = houseService.getAllHouses()
@@ -268,11 +279,7 @@ public class Measures {
             return 1.0;
         }
 
-        // uW
-        MembershipFunction qualifierFun = qualifierService.getMembershipFunction(summary.getQualifier());
-
-        Double inW1 = qualifierFun.getSupport() / houseService.countHouses();
-        return 1.0 - inW1;
+        return 1.0 - attributeSummaryService.getSupport(summary.getQualifier().getAttributeSummary()).size() / houseService.countHouses();
     }
 
     // T10
@@ -283,8 +290,11 @@ public class Measures {
 
         // uW
         MembershipFunction qualifierFun = qualifierService.getMembershipFunction(summary.getQualifier());
-
-        return 1.0 - (qualifierFun.getCardinality() / houseService.countHouses());
+        Double cardDivider = houseService.getAllHouses()
+                .stream()
+                .map(i -> houseService.getAttributeHouseValue(i, summary.getQualifier().getAttributeSummary().getAttribute()))
+                .max(Double::compare).orElseThrow(() -> new RuntimeException("Nie poprawna miara T10"));
+        return 1.0 - (qualifierFun.getCardinality() / cardDivider);
     }
 
     // T11
