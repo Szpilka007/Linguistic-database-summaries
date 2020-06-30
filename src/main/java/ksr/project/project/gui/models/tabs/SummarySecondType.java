@@ -18,6 +18,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -136,6 +138,27 @@ public class SummarySecondType extends JPanel implements ActionListener {
             String summary = measures.allMeasuresToString(summarySecondType);
             JOptionPane.showMessageDialog(this,
                     quantifier + " are/have " + attributeSummaryFromList +  " " + attributeSummary1.getAttribute() + " \n Measures: \n" + summary);
+        }
+
+        else if (e.getActionCommand().equals("SAVE")) {
+            String attributeSummary = s_list.getSelectedValue().toString();
+            String qualifier = w_list.getSelectedValue().toString();
+            String quantifier = q_list.getSelectedValue().toString();
+            List<AttributeSummary> attributeSummaries = new ArrayList<>();
+            Qualifier qualifier1 = new Qualifier();
+            qualifier1.setAttributeSummary(attributeSummaryService.returnAttributeSummaryByName(qualifier));
+            AttributeSummary attributeSummary1 = attributeSummaryService.returnAttributeSummaryByName(attributeSummary);
+            attributeSummaries.add(attributeSummary1);
+            Summary summarySecondType = summarizerSingleSecond.generateSummary(
+                    SummaryType.SINGLE_SUBJECT_SECOND,
+                    attributeSummaries,
+                    quantifierService.returnQuantifierByName(quantifier),qualifier1, null);
+            String summary = measures.allMeasuresToString(summarySecondType);
+            String str = quantifier + " are/have " + attributeSummary + " " + attributeSummary1.getAttribute() + " \n Measures: \n" + summary;
+            BufferedWriter writer = new BufferedWriter(new FileWriter("file.txt"));
+            writer.write(str);
+
+            writer.close();
         }
     }
 
